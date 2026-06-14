@@ -38,6 +38,42 @@ activities = {
         "schedule": "월요일, 수요일, 금요일 오후 2:00 - 3:00",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    "Soccer Team": {
+        "description": "팀 스포츠로 협동심을 기르고 경기 기술을 연습합니다",
+        "schedule": "화요일, 목요일 오후 4:00 - 5:30",
+        "max_participants": 18,
+        "participants": ["alex@mergington.edu"]
+    },
+    "Swimming Club": {
+        "description": "수영 연습과 수중 체력 향상을 위한 클럽 활동입니다",
+        "schedule": "수요일, 금요일 오후 3:30 - 5:00",
+        "max_participants": 20,
+        "participants": ["bella@mergington.edu"]
+    },
+    "Art Workshop": {
+        "description": "그림, 조형물, 공예 등을 통해 창의력을 발휘하는 미술 활동입니다",
+        "schedule": "월요일, 수요일 오후 4:00 - 5:30",
+        "max_participants": 15,
+        "participants": ["chloe@mergington.edu"]
+    },
+    "Drama Club": {
+        "description": "연기와 무대 연출을 배우며 공연을 준비합니다",
+        "schedule": "화요일, 목요일 오후 4:30 - 6:00",
+        "max_participants": 18,
+        "participants": ["david@mergington.edu"]
+    },
+    "Math Olympiad Training": {
+        "description": "수학 문제 해결 능력을 높이고 경시대회를 준비합니다",
+        "schedule": "화요일, 금요일 오후 3:30 - 5:00",
+        "max_participants": 12,
+        "participants": ["emma@mergington.edu"]
+    },
+    "Science Research Club": {
+        "description": "과학 실험과 연구 프로젝트를 통해 호기심을 키웁니다",
+        "schedule": "수요일, 목요일 오후 3:30 - 5:00",
+        "max_participants": 14,
+        "participants": ["sophia@mergington.edu"]
     }
 }
 
@@ -61,6 +97,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # 대상 활동 조회
     activity = activities[activity_name]
+
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="이미 신청된 활동입니다")
 
     # 학생 추가
     activity["participants"].append(email)
